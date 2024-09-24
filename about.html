@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        rel="stylesheet"
+    />
+    <title>About Us - Fitclub</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+        .nav__menu {
+            position: relative;
+        }
+
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            position: relative;
+        }
+
+        .dropdown-content a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #FFC107; /* Underline color */
+            transition: width 0.3s;
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+        }
+
+        .dropdown-content a:hover::after {
+            width: 100%;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .link a {
+            color: white; /* Match other navbar links */
+            position: relative;        
+        }
+
+        .link a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #FFC107; /* Underline color */
+            transition: width 0.3s;
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+        }
+
+        .link a:hover::after {
+            width: 100%; /* Full underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <a href="index.html"><img src="assets/logo.png" alt="logo"></a>
+        </div>
+        <ul class="nav__links">
+            <li class="link"><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li class="link"><a href="programs.html"><i class="fas fa-dumbbell"></i> Programs</a></li>
+            <li class="link"><a href="services.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+            <li class="link"><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+            <li class="link"><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+            <li class="dropdown">
+                <a href="#" class="link" style="color: blanchedalmond;"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <div class="dropdown-content">
+                    <a href="member-login.html">Member Login</a>
+                    <a href="trainer-login.html">Trainer Login</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <header class="section__container header__container">
+        <div class="header__content">
+            <h4>ABOUT FITCLUB</h4>
+            <h1><span>OUR</span> STORY</h1>
+        </div>
+    </header>
+
+    <section class="section__container about__container">
+        <h2 class="section__header">Who We Are</h2>
+        <p>
+            Fitclub is more than just a gym; it is a community dedicated to helping you achieve your fitness goals. Our mission is to provide a supportive environment where everyone can pursue a healthier lifestyle.
+        </p>
+        <div class="about__team">
+            <h3>Meet Our Team</h3><br>
+            <div class="team__grid">
+                <div class="team__member">
+                    <h4>Aaditya Verma</h4>
+                    <p>Head Trainer</p>
+                </div>
+                <div class="team__member">
+                    <h4>Tanya Gupta</h4>
+                    <p>Nutritionist</p>
+                </div>
+                <div class="team__member">
+                    <h4>Anirudh Chaterjee</h4>
+                    <p>Yoga Instructor</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section__container map__container">
+        <h2 class="section__header">Our Location</h2>
+        <div id="map"></div>
+        <p style="color: white;">
+            Visit us at our location in BTM Layout, Bengaluru. <br>
+            <a href="https://www.google.com/maps/place/BHCS+Layout,+BHBCS+Layout,+Stage+2,+BTM+Layout,+Bengaluru,+Karnataka+560076/@12.9209464,77.6038503,15.5z/data=!4m6!3m5!1s0x3bae150418305949:0x824fef24ad40b0ed!8m2!3d12.9159914!4d77.6007659!16s%2Fg%2F11q373l4l1?entry=ttu" target="_blank" style="color: bisque;">Navigate to us on Google Maps</a>
+        </p>
+    </section>
+
+    <footer class="section__container footer__container">
+        <div class="footer__content">
+            <div class="footer__socials">
+                <a href="#"><img src="assets/logo.png" alt="logo"></a>
+                <p>Connect with us on social media</p>
+                <a href="https://facebook.com" class="text-white mx-2" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" class="text-white mx-2" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" class="text-white mx-2" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="footer__links">
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="moreInfoModal" class="modal">
+        <div class="modal__content">
+            <span class="close">&times;</span>
+            <h2>More About Fitclub</h2>
+            <p>Fitclub offers a range of fitness programs designed to suit all levels of fitness. Join us to transform your lifestyle and achieve your fitness goals.</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([12.9159914, 77.6007659], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        var marker = L.marker([12.9159914, 77.6007659]).addTo(map)
+            .bindPopup('<b>Fitclub</b><br>BTM Layout, Bengaluru').openPopup();
+
+        var modal = document.getElementById("moreInfoModal");
+
+        var span = document.getElementsByClassName("close")[0];
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

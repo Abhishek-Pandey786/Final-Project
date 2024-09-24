@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        rel="stylesheet"
+    />
+    <title>Community - Fitclub</title>
+    <style>
+        .nav__menu {
+            position: relative;
+        }
+
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            position: relative; /* For the underline effect */
+        }
+
+        .dropdown-content a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #FFC107; /* Underline color */
+            transition: width 0.3s;
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+        }
+
+        .dropdown-content a:hover::after {
+            width: 100%; /* Full underline on hover */
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .link a {
+            color: white; /* Match other navbar links */
+            position: relative; /* For the underline effect */
+        }
+
+        .link a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #FFC107; /* Underline color */
+            transition: width 0.3s;
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+        }
+
+        .link a:hover::after {
+            width: 100%; /* Full underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <a href="index.html"><img src="assets/logo.png" alt="logo"></a>
+        </div>
+        <ul class="nav__links">
+            <li class="link"><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li class="link"><a href="programs.html"><i class="fas fa-dumbbell"></i> Programs</a></li>
+            <li class="link"><a href="services.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+            <li class="link"><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+            <li class="link"><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+            <li class="dropdown">
+                <a href="#" class="link" style="color: blanchedalmond;"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <div class="dropdown-content">
+                    <a href="member-login.html">Member Login</a>
+                    <a href="trainer-login.html">Trainer Login</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <header class="section__container header__container">
+        <div class="header__content">
+            <h4>JOIN OUR COMMUNITY</h4>
+            <h1><span>ENGAGE</span> AND GROW</h1>
+        </div>
+    </header>
+
+    <section class="section__container community__container">
+        <h2 class="section__header">Our Community</h2>
+        <p>
+            At Fitclub, we believe in the power of community. Join us for exciting events, challenges, and support groups. 
+        </p>
+        <div class="community__svg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24">
+                <circle cx="6" cy="6" r="4" fill="#FFC107" />
+                <circle cx="18" cy="6" r="4" fill="#FFC107" />
+                <circle cx="12" cy="16" r="4" fill="#FFC107" />
+                <path d="M6 10v8m12-8v8" stroke="#FFC107" stroke-width="2" stroke-linecap="round" />
+                <path d="M6 14h12" stroke="#FFC107" stroke-width="2" stroke-linecap="round" />
+            </svg>
+        </div>
+        <div class="community__events">
+            <h3>Upcoming Events</h3>
+            <ul>
+                <li>Community Yoga Session - October 15, 2024</li>
+                <li>5K Fun Run - October 10, 2024</li>
+                <li>Healthy Cooking Workshop - October 20, 2024</li>
+            </ul>
+        </div>
+        <div class="community__stories">
+            <h3>Success Stories</h3>
+            <p>Read inspiring stories from our members who have transformed their lives through fitness.</p>
+        </div>
+    </section>
+
+    <footer class="section__container footer__container">
+        <div class="footer__content">
+            <div class="footer__socials">
+                <a href="#"><img src="assets/logo.png" alt="logo"></a>
+                <p>Connect with us on social media</p>
+                <a href="https://facebook.com" class="text-white mx-2" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" class="text-white mx-2" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" class="text-white mx-2" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="footer__links">
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="moreInfoModal" class="modal">
+        <div class="modal__content">
+            <span class="close">&times;</span>
+            <h2>More About Our Community</h2>
+            <p>Join our community events and support groups to stay motivated and connect with like-minded individuals.</p>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("moreInfoModal");
+        var btn = document.getElementById("moreInfoBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

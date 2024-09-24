@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <title>Register - Fitness Website</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .form__group {
+            margin-bottom: 15px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            color: #333;
+            transition: border-color 0.3s;
+        }
+
+        select:focus {
+            border-color: #FFC107;
+            outline: none;
+        }
+
+        .valid {
+            border-color: green;
+        }
+
+        .invalid {
+            border-color: red;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .btn:disabled {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal__content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+            border-radius: 8px;
+            overflow-y: auto;
+            max-height: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .success-message {
+            font-size: 1.2em;
+            color: green;
+            margin-top: 20px;
+        }
+
+        /* Dropdown styles */
+        .nav__menu {
+            position: relative;
+        }
+
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            position: relative;
+        }
+
+        .dropdown-content a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #FFC107; /* Underline color */
+            transition: width 0.3s;
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+        }
+
+        .dropdown-content a:hover::after {
+            width: 100%;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .link a {
+            color: white;
+            position: relative;
+        }
+
+        .link a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #FFC107; /* Underline color */
+            transition: width 0.3s;
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+        }
+
+        .link a:hover::after {
+            width: 100%; /* Full underline on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <img src="assets/logo.png" class="nav__logo" alt="Logo">
+        <ul class="nav__links">
+            <li class="link"><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li class="link"><a href="programs.html"><i class="fas fa-dumbbell"></i> Programs</a></li>
+            <li class="link"><a href="services.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+            <li class="link"><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+            <li class="link"><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+            <li class="dropdown">
+                <a href="#" class="link" style="color: blanchedalmond;"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <div class="dropdown-content">
+                    <a href="member-login.html">Member Login</a>
+                    <a href="trainer-login.html">Trainer Login</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="register__container section__container">
+        <div class="register__content">
+            <h2 class="section__header">Register</h2>
+            <form class="register__form" id="registerForm">
+                <div class="form__group">
+                    <label for="trainerType">Register as:</label>
+                    <select id="trainerType" name="trainerType" required>
+                        <option value="" disabled selected style="color: grey;">-----Select-----</option>
+                        <option value="member">Member</option>
+                        <option value="trainer">Trainer</option>
+                    </select>
+                </div>
+                <div class="form__group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    <div id="usernameError" class="error hidden">Please enter at least 3 alphabetic characters.</div>
+                </div>
+                <div class="form__group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <div id="emailError" class="error hidden">Please enter a valid email address.</div>
+                </div>
+                <div class="form__group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <div id="passwordError" class="error hidden">Password must be at least 8 characters long and contain both letters and numbers.</div>
+                </div>
+                <div class="form__group">
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                    <div id="confirmPasswordError" class="error hidden">Passwords do not match.</div>
+                </div>
+                <div class="form__group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required>
+                    <div id="dobError" class="error hidden">You must be at least 18 years old.</div>
+                </div>
+                <button type="submit" class="btn" id="submitBtn" disabled>Register</button>
+            </form>
+            <p class="register__text">Already have an account? <a href="login.html">Login here</a></p>
+            <p class="register__text"><a href="#" id="termsLink">Read Terms and Conditions</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Fitness Website. All rights reserved.</p>
+    </footer>
+
+    <div id="termsModal" class="modal">
+        <div class="modal__content">
+            <span class="close">&times;</span>
+            <h2>Terms and Conditions</h2>
+            <h3>1. Introduction</h3>
+            <p>Welcome to FitClub. By registering, you agree to comply with the following terms and conditions. Please read carefully.</p>
+            <h3>2. Membership</h3>
+            <p>You must be at least 18 years old to become a member. All information provided must be accurate.</p>
+            <h3>3. Fees</h3>
+            <p>Membership fees are non-refundable and due upon registration.</p>
+            <h3>4. Health and Safety</h3>
+            <p>You should consult with a healthcare provider before starting any exercise program.</p>
+            <h3>5. Conduct</h3>
+            <p>Members are expected to behave respectfully and follow gym rules.</p>
+            <h3>6. Termination</h3>
+            <p>We reserve the right to terminate memberships for violations of these terms.</p>
+            <h3>7. Changes to Terms</h3>
+            <p>We may update these terms. You will be notified of any significant changes.</p>
+            <h3>8. Contact Us</h3>
+            <p>If you have any questions, please contact us at support@fitclub.com.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const username = document.getElementById('username');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirm_password');
+            const dob = document.getElementById('dob');
+            const submitBtn = document.getElementById('submitBtn');
+            const form = document.getElementById('registerForm'); // Get the form element
+    
+            const usernameError = document.getElementById('usernameError');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+            const dobError = document.getElementById('dobError');
+    
+            const termsLink = document.getElementById('termsLink');
+            const termsModal = document.getElementById('termsModal');
+            const closeModal = document.querySelector('.close');
+    
+            // Regular expressions for validation
+            const usernameRegex = /^[a-zA-Z]{3,}$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
+    
+            // Validate the fields
+            function validateForm() {
+                const isUsernameValid = usernameRegex.test(username.value);
+                const isEmailValid = emailRegex.test(email.value);
+                const isPasswordValid = passwordRegex.test(password.value);
+                const isConfirmPasswordValid = password.value === confirmPassword.value;
+                const isDobValid = (new Date() - new Date(dob.value)) >= 18 * 365 * 24 * 60 * 60 * 1000; // 18 years in milliseconds
+    
+                username.classList.toggle('invalid', !isUsernameValid);
+                username.classList.toggle('valid', isUsernameValid);
+                usernameError.classList.toggle('hidden', isUsernameValid);
+    
+                email.classList.toggle('invalid', !isEmailValid);
+                email.classList.toggle('valid', isEmailValid);
+                emailError.classList.toggle('hidden', isEmailValid);
+    
+                password.classList.toggle('invalid', !isPasswordValid);
+                password.classList.toggle('valid', isPasswordValid);
+                passwordError.classList.toggle('hidden', isPasswordValid);
+    
+                confirmPassword.classList.toggle('invalid', !isConfirmPasswordValid);
+                confirmPassword.classList.toggle('valid', isConfirmPasswordValid);
+                confirmPasswordError.classList.toggle('hidden', isConfirmPasswordValid);
+    
+                const isDobError = !isDobValid;
+                dob.classList.toggle('invalid', isDobError);
+                dob.classList.toggle('valid', !isDobError);
+                dobError.classList.toggle('hidden', !isDobError);
+    
+                // Enable submit button only if all validations pass
+                submitBtn.disabled = !(isUsernameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid && !isDobError);
+            }
+    
+            // Add event listeners to fields
+            username.addEventListener('input', validateForm);
+            email.addEventListener('input', validateForm);
+            password.addEventListener('input', validateForm);
+            confirmPassword.addEventListener('input', validateForm);
+            dob.addEventListener('input', validateForm);
+    
+            // Handle form submission
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault(); // Prevent form from submitting
+    
+                const formData = {
+                    username: username.value,
+                    email: email.value,
+                    password: password.value,
+                    trainerType: document.getElementById('trainerType').value,
+                    dob: dob.value,
+                };
+    
+                try {
+                    const response = await fetch('/api/register', { // Adjust API endpoint as necessary
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData),
+                    });
+    
+                    const data = await response.json();
+    
+                    if (response.ok) {
+                        alert(data.msg); // Show success message
+                        form.reset();
+                        submitBtn.disabled = true;
+                    } else {
+                        alert(data.msg || 'Error occurred during registration');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Server error. Please try again later.');
+                }
+            });
+    
+            // Open terms modal
+            termsLink.onclick = function () {
+                termsModal.style.display = "block";
+            }
+    
+            // Close terms modal
+            closeModal.onclick = function () {
+                termsModal.style.display = "none";
+            }
+    
+            // Close modal when clicking outside of modal content
+            window.onclick = function (event) {
+                if (event.target === termsModal) {
+                    termsModal.style.display = "none";
+                }
+            }
+        });
+    </script>
+    
+</body>
+
+</html>

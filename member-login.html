@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    rel="stylesheet"
+  />
+  <title>Login - Fitness Website</title>
+  <style>
+    .nav__menu {
+      position: relative;
+    }
+
+    .dropdown {
+      display: inline-block;
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      position: relative;
+    }
+
+    .dropdown-content a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #FFC107; /* Underline color */
+      transition: width 0.3s;
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+    }
+
+    .dropdown-content a:hover::after {
+      width: 100%;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .link a {
+      color: white; /* Match the dropdown link color */
+      position: relative;        
+    }
+
+    .link a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #FFC107; /* Underline color */
+      transition: width 0.3s;
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+    }
+
+    .link a:hover::after {
+      width: 100%; /* Full underline on hover */
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <img src="assets/logo.png" class="nav__logo" alt="Logo">
+    <ul class="nav__links">
+      <li class="link"><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li class="link"><a href="programs.html"><i class="fas fa-dumbbell"></i> Programs</a></li>
+      <li class="link"><a href="services.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+      <li class="link"><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+      <li class="link"><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+      <li class="dropdown">
+        <a href="#" class="link" style="color: blanchedalmond;"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <div class="dropdown-content">
+          <a href="member-login.html">Member Login</a>
+          <a href="trainer-login.html">Trainer Login</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="login__container section__container">
+    <div class="login__content">
+      <h2 class="section__header">Member Login</h2>
+      <form id="loginForm" class="login__form">
+        <div class="form__group">
+          <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form__group">
+          <label for="password"><i class="fas fa-lock"></i> Password:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn">Login</button>
+      </form>
+      <p class="login__text">Don't have an account? <a href="register.html">Sign up here</a></p>
+      <p class="login__text">Forgot your password? <a href="#" id="forgotPasswordLink">Click here</a></p>
+    </div>
+  </section>
+
+  <div id="forgotPasswordModal" class="modal">
+    <div class="modal__content">
+      <span class="close">&times;</span>
+      <h2>Reset Password</h2>
+      <p>Please enter your email to receive a password reset link.</p>
+      <form class="modal__form">
+        <div class="form__group">
+          <label for="resetEmail" style="color: black;"><i class="fas fa-envelope" style="color: black;"></i> Email:</label>
+          <input type="email" id="resetEmail" name="resetEmail" required>
+        </div>
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="loginSuccessModal" class="modal">
+    <div class="modal__content">
+      <span class="close">&times;</span>
+      <h2>Login Successful</h2>
+      <p>Welcome back! You have successfully logged in.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Fitness Website. All rights reserved.</p>
+  </footer>
+
+  <script>
+    var forgotPasswordModal = document.getElementById("forgotPasswordModal");
+    var loginSuccessModal = document.getElementById("loginSuccessModal");
+
+    var forgotPasswordBtn = document.getElementById("forgotPasswordLink");
+    var loginForm = document.getElementById("loginForm");
+
+    var spans = document.getElementsByClassName("close");
+
+    forgotPasswordBtn.onclick = function() {
+      forgotPasswordModal.style.display = "block";
+    }
+
+    for (var i = 0; i < spans.length; i++) {
+      spans[i].onclick = function() {
+        forgotPasswordModal.style.display = "none";
+        loginSuccessModal.style.display = "none";
+      }
+    }
+
+    window.onclick = function(event) {
+      if (event.target == forgotPasswordModal) {
+        forgotPasswordModal.style.display = "none";
+      }
+      if (event.target == loginSuccessModal) {
+        loginSuccessModal.style.display = "none";
+      }
+    }
+    loginForm.onsubmit = function(event) {
+      event.preventDefault();
+      loginSuccessModal.style.display = "block";
+    }
+  </script>
+</body>
+</html>
